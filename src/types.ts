@@ -1,3 +1,9 @@
+import WebSocket from "ws";
+
+// ============================================
+// REST API Types
+// ============================================
+
 export interface BalanceResponse {
   // Define types according to the Gemini API response for balance
   currency: string;
@@ -100,3 +106,16 @@ export interface GeminiErrorResponse {
   message: string;
   originalError?: string;
 }
+
+
+// ============================================
+// WebSocket Types
+// ============================================
+export type Subscription = {
+  type: string;
+  subscriptions: any[];
+};
+
+
+export type MessageHandler = (data: WebSocket.Data) => void;
+

@@ -1,3 +1,2 @@
-export * from './gemini-client';
-export * from './types';
-export * from './errors';
+export { GeminiClient } from './gemini-client';
+export { GeminiWebSocket } from './web-sockets/gemini-web-socket';
