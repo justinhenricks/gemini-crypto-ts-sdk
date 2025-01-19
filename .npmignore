@@ -1,0 +1,6 @@
+src/dev/
+**/*.test.ts
+coverage/
+.github/
+.vscode/
+node_modules/ 
