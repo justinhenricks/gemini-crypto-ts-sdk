@@ -11,6 +11,7 @@ export interface GeminiSocketConstructorParams {
   apiSecret: string;
   onHeartbeat?: () => void;
   onClose?: () => void;
+  // eslint-disable-next-line no-unused-vars
   onError?: (error: Error) => void;
   mode: "sandbox" | "live";
 }
@@ -28,6 +29,7 @@ export class GeminiWebSocket {
   private apiSecret: string;
   private onHeartbeat?: () => void;
   private onClose?: () => void;
+  // eslint-disable-next-line no-unused-vars
   private onError?: (error: Error) => void;
   constructor({
     endpoint,

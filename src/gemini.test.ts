@@ -20,7 +20,7 @@ describe('Gemini', () => {
 
     describe('constructor', () => {
         it('should initialize with default sandbox mode', () => {
-            const gemini = new Gemini(mockConfig);
+            new Gemini(mockConfig);
 
             expect(GeminiClient).toHaveBeenCalledWith({
                 apiKey: mockConfig.apiKey,
@@ -30,7 +30,7 @@ describe('Gemini', () => {
         });
 
         it('should initialize with live mode when specified', () => {
-            const gemini = new Gemini({ ...mockConfig, mode: 'live' });
+            new Gemini({ ...mockConfig, mode: 'live' });
 
             expect(GeminiClient).toHaveBeenCalledWith({
                 apiKey: mockConfig.apiKey,

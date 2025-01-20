@@ -33,6 +33,7 @@ export class Gemini {
             subscriptions?: Subscription | Subscription[],
             onHeartbeat?: () => void,
             onClose?: () => void,
+            // eslint-disable-next-line no-unused-vars
             onError?: (error: Error) => void,
         }
     ): GeminiWebSocket {
