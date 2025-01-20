@@ -1,6 +1,7 @@
 import { describe, it, expect, beforeEach, vi } from 'vitest'
 import { GeminiClient } from './api-client'
 import { GeminiAPIError } from './errors'
+import { NewOrderRequest } from './types'
 
 describe('GeminiClient', () => {
     let client: GeminiClient
@@ -143,11 +144,11 @@ describe('GeminiClient', () => {
                     json: () => Promise.resolve(mockResponse)
                 } as Response)
 
-                const orderRequest = {
+                const orderRequest: NewOrderRequest = {
                     symbol: 'BTCUSD',
                     amount: '1',
                     price: '50000',
-                    side: 'buy',
+                    side: 'buy' as const,
                     type: 'exchange limit'
                 }
 

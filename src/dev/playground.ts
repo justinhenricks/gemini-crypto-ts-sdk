@@ -2,12 +2,14 @@ import { config } from 'dotenv';
 import { Gemini } from "../";
 config();
 
-export const playground = () => {
+export const playground = async () => {
     const gemini = new Gemini({
         apiKey: process.env.GEMINI_PRODUCTION_API_KEY!,
         apiSecret: process.env.GEMINI_PRODUCTION_API_SECRET!,
         mode: "live"
     });
+
+    console.log("hello")
 
     gemini.api.getTicker("BTCUSD").then((ticker) => {
         console.log("ticker");

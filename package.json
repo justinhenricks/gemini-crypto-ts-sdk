@@ -13,7 +13,7 @@
     "test:coverage": "vitest --coverage --ui",
     "dev": "nodemon",
     "build": "rimraf ./build && tsc",
-    "lint": "eslint . --ext .ts",
+    "lint": "eslint src",
     "coverage": "vitest run --coverage"
   },
   "keywords": [
@@ -25,22 +25,22 @@
   "author": "Justin Henricks",
   "license": "MIT",
   "devDependencies": {
+    "@eslint/js": "^8.56.0",
     "@types/node": "^22.10.7",
     "@types/ws": "^8.5.13",
-    "@typescript-eslint/eslint-plugin": "^8.20.0",
-    "@typescript-eslint/parser": "^8.20.0",
     "@vitest/coverage-v8": "^3.0.2",
     "@vitest/ui": "^3.0.2",
-    "eslint": "^9.18.0",
+    "eslint": "^8.56.0",
     "nodemon": "^3.1.9",
     "rimraf": "^6.0.1",
     "ts-node": "^10.9.2",
     "typescript": "^5.7.3",
-    "typescript-eslint": "^8.20.0",
+    "typescript-eslint": "^7.0.0",
     "vitest": "^3.0.2"
   },
   "dependencies": {
     "dotenv": "^16.4.5",
     "ws": "^8.18.0"
-  }
+  },
+  "type": "module"
 }
