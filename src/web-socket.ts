@@ -78,7 +78,7 @@ export class GeminiWebSocket {
   }
 
   private static createHeaders(endpoint: string, apiKey: string, apiSecret: string) {
-    const nonce = Date.now();
+    const nonce = Math.floor(Date.now() / 1000);
 
     // Create the payload
     const payload = {
