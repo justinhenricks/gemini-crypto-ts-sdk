@@ -4,15 +4,20 @@
     "type": "git",
     "url": "https://github.com/justinhenricks/gemini-crypto-ts-sdk.git"
   },
-  "version": "1.0.3",
+  "version": "1.0.4",
   "description": "TypeScript SDK wrapper for Gemini Crypto Exchange API",
   "main": "./dist/cjs/index.js",
   "module": "./dist/esm/index.js",
   "exports": {
     ".": {
-      "import": "./dist/esm/index.js",
-      "require": "./dist/cjs/index.js",
-      "types": "./dist/esm/index.d.ts"
+      "import": {
+        "types": "./dist/esm/index.d.ts",
+        "default": "./dist/esm/index.js"
+      },
+      "require": {
+        "types": "./dist/cjs/index.d.ts",
+        "default": "./dist/cjs/index.js"
+      }
     }
   },
   "types": "./dist/esm/index.d.ts",
