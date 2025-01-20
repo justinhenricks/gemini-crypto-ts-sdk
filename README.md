@@ -1,5 +1,9 @@
 # 🚀 Gemini Crypto TypeScript SDK
 
+[![Build Status](https://github.com/justinhenricks/gemini-crypto-ts-sdk/actions/workflows/test-and-lint.yml/badge.svg)](https://github.com/justinhenricks/gemini-crypto-ts-sdk/actions)
+[![npm version](https://badge.fury.io/js/gemini-crypto-ts-sdk.svg)](https://badge.fury.io/js/gemini-crypto-ts-sdk)
+[![License: MIT](https://img.shields.io/badge/License-MIT-yellow.svg)](https://opensource.org/licenses/MIT)
+
 A TypeScript SDK for interacting with the Gemini Cryptocurrency Exchange API. This SDK provides a simple interface for both REST and WebSocket APIs.
 
 ## Features
