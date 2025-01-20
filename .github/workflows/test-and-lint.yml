@@ -6,6 +6,7 @@ on:
 
 jobs:
   setup:
+    name: ⚙️ Setup
     runs-on: ubuntu-latest
     steps:
       - uses: actions/checkout@v4
@@ -26,6 +27,7 @@ jobs:
           key: ${{ runner.os }}-node-modules-${{ hashFiles('**/package-lock.json') }}
 
   lint:
+    name: 💅 Lint
     needs: setup
     runs-on: ubuntu-latest
     steps:
@@ -46,6 +48,7 @@ jobs:
         run: npm run lint
 
   test:
+    name: 🧪 Test
     needs: setup
     runs-on: ubuntu-latest
     steps:
