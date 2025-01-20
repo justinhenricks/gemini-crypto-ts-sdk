@@ -1,11 +1,15 @@
 {
-    "extends": "./tsconfig.json",
+    "extends": "./tsconfig.base.json",
     "compilerOptions": {
-        "module": "CommonJS",
-        "outDir": "./dist/cjs",
-        "declaration": true,
-        "declarationMap": true,
-        "sourceMap": true,
-        "esModuleInterop": true
-    }
+        "module": "commonjs",
+        "outDir": "./dist/cjs"
+    },
+    "include": [
+        "src/**/*"
+    ],
+    "exclude": [
+        "src/dev/**/*",
+        "**/*.test.ts",
+        "node_modules"
+    ]
 }

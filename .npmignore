@@ -3,4 +3,7 @@ src/dev/
 coverage/
 .github/
 .vscode/
-node_modules/ 
+node_modules/
+tsconfig*.json
+.eslintrc
+nodemon.json 
