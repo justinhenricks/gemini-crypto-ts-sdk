@@ -1,7 +1,9 @@
 import { createHmac } from "crypto";
 import WebSocket from "ws";
-import { MessageHandler, Subscription } from "../types";
-interface GeminiSocketConstructorParams {
+import { MessageHandler, Subscription } from "./types";
+import { GEMINI_PRODUCTION_WEBSOCKET_BASE_URL, GEMINI_SANDBOX_WEBSOCKET_BASE_URL } from "./constants";
+
+export interface GeminiSocketConstructorParams {
   endpoint: string;
   messageHandler: MessageHandler;
   subscriptions?: Subscription | Subscription[];
@@ -9,7 +11,8 @@ interface GeminiSocketConstructorParams {
   apiSecret: string;
   onHeartbeat?: () => void;
   onClose?: () => void;
-  onError: (error: Error) => void;
+  onError?: (error: Error) => void;
+  mode: "sandbox" | "live";
 }
 
 export class GeminiWebSocket {
@@ -25,7 +28,7 @@ export class GeminiWebSocket {
   private apiSecret: string;
   private onHeartbeat?: () => void;
   private onClose?: () => void;
-  private onError: (error: Error) => void;
+  private onError?: (error: Error) => void;
   constructor({
     endpoint,
     messageHandler,
@@ -35,9 +38,10 @@ export class GeminiWebSocket {
     onHeartbeat,
     onClose,
     onError,
+    mode = "sandbox"
   }: GeminiSocketConstructorParams) {
     try {
-      const url = `wss://api.gemini.com${endpoint}`;
+      const url = `${mode === "live" ? GEMINI_PRODUCTION_WEBSOCKET_BASE_URL : GEMINI_SANDBOX_WEBSOCKET_BASE_URL}${endpoint}`;
       this.url = url;
       this.endpoint = endpoint;
       this.subscriptions = subscriptions;
@@ -100,12 +104,12 @@ export class GeminiWebSocket {
   private setupEventListeners(messageHandler: MessageHandler) {
     this.ws.on("open", this.onOpen.bind(this));
     this.ws.on("message", (data) => messageHandler(data));
-    this.ws.on("close", () => this.onClose?.());
-    this.ws.on("error", (error) => this.onError(error));
+    this.ws.on("close", () => this.onCloseWrapper());
+    this.ws.on("error", (error) => this.onErrorWrapper(error));
   }
 
   protected onOpen(): void {
-    console.log(`SUCCESSFULLY CONNECTED TO GEMINI ${this.endpoint} socket!`);
+    console.log(`🚀 SUCCESSFULLY CONNECTED TO GEMINI ${this.endpoint} SOCKET!`);
     this.handleSubscriptions();
 
     if (this.heartbeatInterval) {
@@ -147,19 +151,25 @@ export class GeminiWebSocket {
   protected async reconnect() {
     try {
       console.log(`Reconnecting to Gemini WebSocket: ${this.endpoint}`);
-      console.log(`GOING TO CLOSE ${this.endpoint} SOCKET`);
       this.ws.close();
-
       this.headers = GeminiWebSocket.createHeaders(this.endpoint, this.apiKey, this.apiSecret);
-
-
-      console.log(`OK ABOUT TO TRY AND RECONNECT TO ${this.endpoint}`);
-      this.ws = new WebSocket(this.url, { headers: this.headers });
+      const WebSocketConstructor = WebSocket;
+      this.ws = new WebSocketConstructor(this.url, { headers: this.headers });
       this.setupEventListeners(this.messageHandler);
     } catch (error) {
       console.error(`Error reconnecting WebSocket: ${error}`);
       // Retry reconnection after delay
       setTimeout(() => this.reconnect(), 5000);
     }
+  }
+
+  protected onCloseWrapper() {
+    console.log(`DISCONNECTED FROM ${this.endpoint} SOCKET!`);
+    this.onClose?.();
+  }
+
+  protected onErrorWrapper(error: Error) {
+    console.error(`WebSocket ${this.endpoint} error:`, error);
+    this.onError?.(error);
   }
 }

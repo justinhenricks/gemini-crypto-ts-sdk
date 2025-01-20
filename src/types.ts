@@ -3,6 +3,7 @@ import WebSocket from "ws";
 // ============================================
 // REST API Types
 // ============================================
+export type GeminiMode = "sandbox" | "live";
 
 export interface BalanceResponse {
   // Define types according to the Gemini API response for balance
