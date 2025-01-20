@@ -4,7 +4,8 @@ A TypeScript SDK for interacting with the Gemini Cryptocurrency Exchange API. Th
 
 ## Features
 
-- 🔒 Secure authentication handling
+- 🔒 Secure authentication handling with nonce support
+- 🌀 REST API support
 - 🔄 Real-time WebSocket data streams
 - 💪 Strongly typed responses
 - 🎮 Sandbox environment support
@@ -16,6 +17,18 @@ npm install gemini-crypto-ts-sdk
 ```
 
 ## Quick Start
+
+### Generating API Keys
+
+To use the Gemini API, you'll need to generate API keys:
+
+1. Log in to your Gemini account at [exchange.gemini.com](https://exchange.gemini.com)
+2. Navigate to Settings > API
+3. Create a new API key pair
+4. Make sure to save both the API key and API secret securely
+5. Set appropriate permissions for your use case, this SDK supports using nonces.
+
+### Usage
 
 ```typescript
 import { Gemini } from 'gemini-crypto-ts-sdk';
