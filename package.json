@@ -1,5 +1,9 @@
 {
   "name": "gemini-crypto-ts-sdk",
+  "repository": {
+    "type": "git",
+    "url": "https://github.com/justinhenricks/gemini-crypto-ts-sdk.git"
+  },
   "version": "0.1.0",
   "description": "TypeScript SDK wrapper for Gemini Crypto Exchange API",
   "main": "dist/index.js",
@@ -15,7 +19,9 @@
     "dev": "nodemon",
     "build": "rimraf ./build && tsc",
     "lint": "eslint src",
-    "coverage": "vitest run --coverage"
+    "coverage": "vitest run --coverage",
+    "prepare": "npm run build",
+    "prepublishOnly": "npm test && npm run lint"
   },
   "keywords": [
     "api",
@@ -44,5 +50,12 @@
     "dotenv": "^16.4.5",
     "ws": "^8.18.0"
   },
-  "type": "module"
+  "type": "module",
+  "bugs": {
+    "url": "https://github.com/justinhenricks/gemini-crypto-ts-sdk/issues"
+  },
+  "homepage": "https://github.com/justinhenricks/gemini-crypto-ts-sdk#readme",
+  "publishConfig": {
+    "access": "public"
+  }
 }
